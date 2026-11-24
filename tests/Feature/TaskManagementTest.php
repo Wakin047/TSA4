@@ -63,6 +63,9 @@ class TaskManagementTest extends TestCase
         $this->get(route('profile.edit'))
             ->assertOk()
             ->assertSeeText('Profile Information')
+            ->assertSeeText('Update Password')
+            ->assertSeeText('Delete Account')
+            ->assertSee('profile-settings-grid', false)
             ->assertSee('name="full_name"', false)
             ->assertSee('name="username"', false);
     }
