@@ -56,6 +56,36 @@ class TaskManagementTest extends TestCase
         ]);
     }
 
+    public function test_authenticated_user_can_open_profile_settings(): void
+    {
+        $this->actingAs(User::factory()->create());
+
+        $this->get(route('profile.edit'))
+            ->assertOk()
+            ->assertSeeText('Profile Information')
+            ->assertSee('name="full_name"', false)
+            ->assertSee('name="username"', false);
+    }
+
+    public function test_authenticated_user_can_update_profile_information(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $this->patch(route('profile.update'), [
+            'full_name' => 'Updated Name',
+            'username' => 'updated-username',
+            'email' => 'updated@example.com',
+        ])->assertRedirect(route('profile.edit'));
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'full_name' => 'Updated Name',
+            'username' => 'updated-username',
+            'email' => 'updated@example.com',
+        ]);
+    }
+
     public function test_authenticated_user_can_create_and_archive_a_task(): void
     {
         $this->actingAs(User::factory()->create());

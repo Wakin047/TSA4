@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Tasks for Today')</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/tasks.css') }}?v={{ filemtime(public_path('css/tasks.css')) }}">
 </head>
 <body>
@@ -31,7 +32,15 @@
             <div class="alert alert-success" role="status">{{ session('status') }}</div>
         @endif
 
-        @yield('content')
+        @isset($header)
+            {{ $header }}
+        @endisset
+
+        @if (isset($slot))
+            {{ $slot }}
+        @else
+            @yield('content')
+        @endif
     </main>
 
     <footer class="site-footer">Tasks for Today <span>·</span> Keep your day moving</footer>

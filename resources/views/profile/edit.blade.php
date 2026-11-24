@@ -1,8 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
+        <div class="page-heading">
+            <div>
+                <p class="eyebrow">Account settings</p>
+                <h1>{{ __('Profile') }}</h1>
+                <p class="page-description">Update your account details and security settings.</p>
+            </div>
+        </div>
     </x-slot>
 
     <div class="py-12">
