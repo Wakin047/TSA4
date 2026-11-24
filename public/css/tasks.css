@@ -210,6 +210,14 @@ button, input, textarea, select { font: inherit; }
 .panel-heading { display: flex; min-height: 76px; padding: 18px 23px; align-items: center; justify-content: space-between; border-bottom: 1px solid #edf1f7; }
 .panel-heading h2 { margin: 0; color: #1a2e50; font: 700 15px 'Segoe UI', Arial, sans-serif; }
 .panel-heading p { margin: 5px 0 0; color: #8794a8; font-size: 11px; }
+.profile-page-intro { display: flex; margin-bottom: 22px; padding: 24px 28px; align-items: center; justify-content: space-between; gap: 20px; border: 1px solid #e0e8f4; border-radius: 16px; background: linear-gradient(115deg, #fff 0%, #f8fbff 72%, #edf5ff 100%); box-shadow: 0 10px 28px rgb(15 45 100 / 8%); }
+.profile-intro-main { display: flex; min-width: 0; align-items: center; gap: 17px; }
+.profile-intro-icon { display: grid; width: 52px; height: 52px; flex: 0 0 52px; place-items: center; border-radius: 15px; background: linear-gradient(140deg, #2460c9, #158dc5); box-shadow: 0 7px 16px rgb(23 87 177 / 20%); color: #fff; }
+.profile-intro-icon svg { width: 25px; height: 25px; }
+.profile-intro-eyebrow { margin: 0 0 4px; color: #3572c8; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.profile-page-intro h1 { margin: 0; color: #172b4d; font-size: clamp(24px, 3vw, 30px); font-weight: 750; letter-spacing: -.04em; line-height: 1.2; }
+.profile-page-intro .profile-intro-main p:last-child { margin: 6px 0 0; color: #71819a; font-size: 13px; line-height: 1.5; }
+.profile-intro-badge { flex: 0 0 auto; padding: 8px 11px; border: 1px solid #d7e5f7; border-radius: 999px; background: #f3f8ff; color: #3768a9; font-size: 9px; font-weight: 800; letter-spacing: .08em; }
 .task-list { padding: 4px 22px; }
 .task-card { display: flex; padding: 20px 2px; align-items: center; justify-content: space-between; gap: 25px; border-bottom: 1px solid #edf1f7; }
 .task-card:last-child { border-bottom: 0; }
@@ -251,11 +259,11 @@ button, input, textarea, select { font: inherit; }
 .profile-delete-section { border-color: #e9b9bd; }
 .profile-delete-section .panel-heading { border-bottom-color: #f0d1d2; background: #fff4f4; }
 .profile-delete-section .panel-heading h2 { color: #8f1722; }
-.profile-settings-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(280px, .6fr); align-items: start; gap: 20px; }
+.profile-settings-grid { display: grid; margin-top: 22px; grid-template-columns: minmax(0, 1.35fr) minmax(290px, .65fr); align-items: start; gap: 22px; }
 .profile-settings-main { display: grid; min-width: 0; gap: 20px; }
 .profile-settings-sidebar { min-width: 0; }
-.profile-section { min-width: 0; }
-.profile-section .panel-heading { align-items: flex-start; }
+.profile-section { min-width: 0; border-color: #e2e9f2; border-radius: 14px; box-shadow: 0 10px 28px rgb(15 45 100 / 7%); }
+.profile-section .panel-heading { min-height: 82px; padding: 19px 24px; align-items: flex-start; }
 .profile-section .panel-heading h2 { font-size: 15px; }
 .profile-form { display: grid; gap: 18px; }
 .profile-form-grid { margin: 0; }
@@ -282,6 +290,7 @@ button, input, textarea, select { font: inherit; }
     .benefits { grid-template-columns: 1fr; }
     .page-heading { align-items: flex-start; flex-direction: column; }
     .profile-settings-grid { grid-template-columns: 1fr; }
+    .profile-page-intro { align-items: flex-start; flex-direction: column; }
 }
 
 @media (max-width: 520px) {
@@ -291,4 +300,7 @@ button, input, textarea, select { font: inherit; }
     .form-field-wide { grid-column: auto; }
     .form-panel, .detail-panel { padding: 19px; }
     .profile-delete-content { padding: 19px; }
+    .profile-page-intro { padding: 20px; }
+    .profile-intro-main { align-items: flex-start; }
+    .profile-intro-icon { width: 44px; height: 44px; flex-basis: 44px; border-radius: 13px; }
 }
