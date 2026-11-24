@@ -35,7 +35,7 @@
 
     <main class="page-shell">
         @if (session('status'))
-            <div class="alert" role="status">{{ session('status') }}</div>
+            <div class="alert alert-success" role="status">{{ session('status') }}</div>
         @endif
         @yield('content')
     </main>

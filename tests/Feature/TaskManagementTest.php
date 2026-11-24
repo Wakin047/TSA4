@@ -152,7 +152,13 @@ class TaskManagementTest extends TestCase
             'description' => '',
             'due_date' => '',
             'status' => 'done',
-        ])->assertRedirect(route('tasks.index'));
+        ])->assertRedirect(route('tasks.index'))
+            ->assertSessionHas('status', 'Task updated successfully.');
+
+        $this->get(route('tasks.index'))
+            ->assertOk()
+            ->assertSee('Task updated successfully.')
+            ->assertSee('class="alert alert-success"', false);
 
         Mail::assertSent(TaskCompletedMail::class, function (TaskCompletedMail $mail): bool {
             return $mail->hasTo(config('mail.task_notification_recipient'));

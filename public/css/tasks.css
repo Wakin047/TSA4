@@ -279,6 +279,7 @@ button, input, textarea, select { font: inherit; }
 .detail-due { color: #71819a; font-size: 12px; }
 .detail-description { max-width: 760px; color: #60718b; font-size: 14px; line-height: 1.8; white-space: pre-line; }
 .alert { margin-bottom: 20px; padding: 12px 15px; border: 1px solid #c6dcfb; border-radius: 9px; background: #eff6ff; color: #174b91; font-size: 13px; }
+.alert-success { border-color: #b7e0c3; background: #effaf2; color: #176b37; }
 .site-footer { padding: 18px 24px; border-top: 1px solid rgb(255 255 255 / 18%); color: #d3e4ff; text-align: center; font-size: 11px; }
 .site-footer span { margin: 0 4px; color: #8edaff; }
 
