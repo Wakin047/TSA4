@@ -245,8 +245,12 @@ button, input, textarea, select { font: inherit; }
 .field-error { margin: 0; color: #b74949; font-size: 11px; }
 .form-actions { margin-top: 24px; }
 .form-actions form { margin: 0; }
-.button-danger { border-color: #f4d5d6; background: #fff; color: #c4454a; }
-.button-danger:hover { background: #fff5f5; }
+.button-danger { border-color: #8f1722; background: #a61e2d; color: #fff; box-shadow: 0 5px 14px rgb(143 23 34 / 20%); }
+.button-danger:hover { border-color: #74121b; background: #851a24; }
+.button-danger:focus-visible { outline: 3px solid #f4a1a8; outline-offset: 2px; }
+.profile-delete-section { border-color: #e9b9bd; }
+.profile-delete-section .panel-heading { border-bottom-color: #f0d1d2; background: #fff4f4; }
+.profile-delete-section .panel-heading h2 { color: #8f1722; }
 .profile-settings-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(280px, .6fr); align-items: start; gap: 20px; }
 .profile-settings-main { display: grid; min-width: 0; gap: 20px; }
 .profile-settings-sidebar { min-width: 0; }
