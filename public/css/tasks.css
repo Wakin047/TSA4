@@ -269,7 +269,7 @@ button, input, textarea, select { font: inherit; }
 .profile-form { display: grid; gap: 18px; }
 .profile-form-grid { margin: 0; }
 .profile-avatar-editor { display: flex; padding: 16px; align-items: center; gap: 17px; border: 1px solid #e3eaf3; border-radius: 12px; background: #f9fbfe; }
-.profile-avatar-preview { display: grid; width: 112px; height: 112px; flex: 0 0 112px; overflow: hidden; place-items: center; border: 3px solid #fff; border-radius: 50%; background: #eaf2ff; color: #3572c8; box-shadow: 0 0 0 1px #dce5f2, 0 8px 20px rgb(23 60 112 / 12%); }
+.profile-avatar-preview { display: grid; width: 112px; height: 112px; flex: 0 0 112px; overflow: hidden; place-items: center; border: 3px solid #fff; border-radius: 50%; background: #eaf2ff; color: #3572c8; box-shadow: 0 0 0 2px #3b82f6, 0 0 0 5px #dceaff, 0 8px 20px rgb(23 60 112 / 12%); }
 .profile-avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
 .profile-avatar-preview svg { width: 42px; height: 42px; }
 .profile-avatar-fields { min-width: 0; flex: 1; }
