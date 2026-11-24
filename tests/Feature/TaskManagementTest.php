@@ -109,7 +109,12 @@ class TaskManagementTest extends TestCase
             'full_name' => 'Updated Name',
             'username' => 'updated-username',
             'email' => 'updated@example.com',
-        ])->assertRedirect(route('profile.edit'));
+        ])->assertRedirect(route('profile.edit'))
+            ->assertSessionHas('status', 'Profile updated successfully!');
+
+        $this->get(route('profile.edit'))
+            ->assertSeeText('Profile updated successfully!')
+            ->assertSee('class="alert alert-success"', false);
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,

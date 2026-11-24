@@ -50,10 +50,6 @@
 
         <div class="form-actions profile-form-actions">
             <button class="button button-primary" type="submit">{{ __('Save profile') }}</button>
-
-            @if (session('status') === 'profile-updated')
-                <p class="profile-saved" role="status">{{ __('Saved.') }}</p>
-            @endif
         </div>
     </form>
 </section>
