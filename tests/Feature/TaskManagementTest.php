@@ -88,13 +88,17 @@ class TaskManagementTest extends TestCase
 
     public function test_authenticated_user_can_open_profile_settings(): void
     {
-        $this->actingAs(User::factory()->create());
+        $user = User::factory()->create();
+        $user->update(['avatar_path' => 'avatars/profile-photo.jpg']);
+        $this->actingAs($user);
 
         $this->get(route('profile.edit'))
             ->assertOk()
             ->assertSeeText('Profile Information')
             ->assertSeeText('Update Password')
             ->assertSeeText('Delete Account')
+            ->assertSee('profile-intro-icon', false)
+            ->assertDontSee('profile-intro-avatar', false)
             ->assertSee('profile-settings-grid', false)
             ->assertSee('name="full_name"', false)
             ->assertSee('name="username"', false);
