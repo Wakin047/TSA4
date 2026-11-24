@@ -6,9 +6,27 @@
         </div>
     </header>
 
-    <form method="post" action="{{ route('profile.update') }}" class="form-panel profile-form">
+    <form method="post" action="{{ route('profile.update') }}" class="form-panel profile-form" enctype="multipart/form-data">
         @csrf
         @method('patch')
+
+        <div class="profile-avatar-editor">
+            <div class="profile-avatar-preview">
+                @if ($user->avatar_path)
+                    <img src="{{ asset('storage/'.$user->avatar_path) }}" alt="{{ $user->full_name }} profile photo">
+                @else
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                @endif
+            </div>
+            <div class="form-field profile-avatar-fields">
+                <x-input-label for="avatar" :value="__('Profile photo')" />
+                <input id="avatar" name="avatar" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+                <p class="profile-avatar-help">{{ __('JPG, PNG, or WebP. Maximum file size: 2 MB.') }}</p>
+                <x-input-error :messages="$errors->get('avatar')" />
+            </div>
+        </div>
 
         <div class="form-grid profile-form-grid">
             <div class="form-field">

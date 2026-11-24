@@ -6,7 +6,9 @@ use App\Mail\TaskCompletedMail;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class TaskManagementTest extends TestCase
@@ -115,6 +117,48 @@ class TaskManagementTest extends TestCase
             'username' => 'updated-username',
             'email' => 'updated@example.com',
         ]);
+    }
+
+    public function test_authenticated_user_can_upload_and_replace_profile_photo(): void
+    {
+        Storage::fake('public');
+        $user = User::factory()->create();
+        $oldAvatarPath = UploadedFile::fake()->image('old-avatar.jpg')->store('avatars', 'public');
+        $user->update(['avatar_path' => $oldAvatarPath]);
+        $this->actingAs($user);
+
+        $newAvatar = UploadedFile::fake()->image('new-avatar.png');
+
+        $this->patch(route('profile.update'), [
+            'full_name' => $user->full_name,
+            'username' => $user->username,
+            'email' => $user->email,
+            'avatar' => $newAvatar,
+        ])->assertRedirect(route('profile.edit'));
+
+        $user->refresh();
+        $this->assertNotSame($oldAvatarPath, $user->avatar_path);
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'avatar_path' => $user->avatar_path,
+        ]);
+        Storage::disk('public')->assertExists($user->avatar_path);
+        Storage::disk('public')->assertMissing($oldAvatarPath);
+    }
+
+    public function test_deleting_account_removes_its_profile_photo(): void
+    {
+        Storage::fake('public');
+        $user = User::factory()->create();
+        $avatarPath = UploadedFile::fake()->image('avatar.jpg')->store('avatars', 'public');
+        $user->update(['avatar_path' => $avatarPath]);
+
+        $this->actingAs($user)
+            ->delete(route('profile.destroy'), ['password' => 'password'])
+            ->assertRedirect('/');
+
+        $this->assertDatabaseMissing('users', ['id' => $user->id]);
+        Storage::disk('public')->assertMissing($avatarPath);
     }
 
     public function test_authenticated_user_can_create_and_archive_a_task(): void
