@@ -36,6 +36,32 @@ class TaskManagementTest extends TestCase
             ->assertDontSee($archived->title);
     }
 
+    public function test_authenticated_user_can_view_archived_tasks_without_active_tasks(): void
+    {
+        $this->actingAs(User::factory()->create());
+
+        $archived = Task::create([
+            'title' => 'Archived task to review',
+            'status' => 'pending',
+        ]);
+        $archived->is_archived = true;
+        $archived->save();
+        Task::create([
+            'title' => 'Active task to keep separate',
+            'status' => 'pending',
+        ]);
+
+        $this->get(route('tasks.index'))
+            ->assertOk()
+            ->assertSee(route('tasks.archived'), false);
+
+        $this->get(route('tasks.archived'))
+            ->assertOk()
+            ->assertSeeText($archived->title)
+            ->assertSeeText('Archived')
+            ->assertDontSeeText('Active task to keep separate');
+    }
+
     public function test_guests_cannot_open_task_management_forms(): void
     {
         $task = Task::create([
@@ -44,6 +70,7 @@ class TaskManagementTest extends TestCase
         ]);
 
         $this->get(route('tasks.create'))->assertRedirect(route('login'));
+        $this->get(route('tasks.archived'))->assertRedirect(route('login'));
         $this->post(route('tasks.store'), [])->assertRedirect(route('login'));
         $this->get(route('tasks.edit', $task))->assertRedirect(route('login'));
         $this->put(route('tasks.update', $task), ['status' => 'done'])->assertRedirect(route('login'));

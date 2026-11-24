@@ -230,6 +230,7 @@ button, input, textarea, select { font: inherit; }
 .status-pending { background: #fff3da; color: #a16c13; }
 .status-in_progress { background: #e5f1ff; color: #3d74a7; }
 .status-done { background: #e4f4e9; color: #287c4f; }
+.archived-badge { display: inline-flex; margin-right: 6px; padding: 5px 9px; border-radius: 999px; background: #edf0f5; color: #66758a; font-size: 10px; font-weight: 700; }
 .task-card-side { display: flex; min-width: 150px; flex-direction: column; align-items: flex-end; gap: 6px; }
 .due-label { color: #8794a8; font-size: 8px; font-weight: 700; letter-spacing: .14em; }
 .task-card-side > strong { color: #425572; font-size: 12px; font-weight: 600; }

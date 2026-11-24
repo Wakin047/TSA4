@@ -14,6 +14,7 @@ Route::redirect('/dashboard', '/tasks')->middleware('auth')->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+    Route::get('/tasks/archived', [TaskController::class, 'archived'])->name('tasks.archived');
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
     Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->whereNumber('task')->name('tasks.edit');
     Route::put('/tasks/{task}', [TaskController::class, 'update'])->whereNumber('task')->name('tasks.update');

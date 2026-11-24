@@ -28,6 +28,17 @@ class TaskController extends Controller
         return view('tasks.create', ['task' => new Task]);
     }
 
+    public function archived(): View
+    {
+        $tasks = Task::query()
+            ->where('is_archived', true)
+            ->orderBy('due_date')
+            ->orderBy('created_at')
+            ->paginate(10);
+
+        return view('tasks.archived', compact('tasks'));
+    }
+
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate($this->rules());

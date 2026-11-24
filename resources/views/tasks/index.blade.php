@@ -22,6 +22,9 @@
                 <h2>Task list</h2>
                 <p>{{ $tasks->total() }} {{ \Illuminate\Support\Str::plural('task', $tasks->total()) }} · Archived tasks are hidden</p>
             </div>
+            @auth
+                <a class="button button-secondary button-small" href="{{ route('tasks.archived') }}">View archived tasks</a>
+            @endauth
         </div>
 
         @if ($tasks->isEmpty())
