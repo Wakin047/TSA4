@@ -48,6 +48,7 @@ class TaskManagementTest extends TestCase
         $this->get(route('tasks.edit', $task))->assertRedirect(route('login'));
         $this->put(route('tasks.update', $task), ['status' => 'done'])->assertRedirect(route('login'));
         $this->delete(route('tasks.destroy', $task))->assertRedirect(route('login'));
+        $this->delete(route('tasks.delete', $task))->assertRedirect(route('login'));
 
         $this->assertDatabaseHas('tasks', [
             'id' => $task->id,
@@ -114,6 +115,27 @@ class TaskManagementTest extends TestCase
             'id' => $task->id,
             'is_archived' => true,
         ]);
+    }
+
+    public function test_authenticated_user_can_permanently_delete_a_task(): void
+    {
+        $this->actingAs(User::factory()->create());
+        $task = Task::create([
+            'title' => 'Remove obsolete task',
+            'status' => 'pending',
+        ]);
+
+        $this->get(route('tasks.index'))
+            ->assertOk()
+            ->assertSee('Edit')
+            ->assertSee('Archive')
+            ->assertSee('Delete');
+
+        $this->delete(route('tasks.delete', $task))
+            ->assertRedirect(route('tasks.index'))
+            ->assertSessionHas('status', 'Task permanently deleted.');
+
+        $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
     }
 
     public function test_completion_email_is_sent_once_per_transition_to_done(): void

@@ -27,6 +27,11 @@
                     @method('DELETE')
                     <button class="button button-secondary" type="submit">Archive task</button>
                 </form>
+                <form method="POST" action="{{ route('tasks.delete', $task) }}" onsubmit="return confirm('Permanently delete this task? This action cannot be undone.');">
+                    @csrf
+                    @method('DELETE')
+                    <button class="button button-danger" type="submit">Delete task</button>
+                </form>
             </div>
         @endauth
     </section>

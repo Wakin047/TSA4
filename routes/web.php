@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->whereNumber('task')->name('tasks.edit');
     Route::put('/tasks/{task}', [TaskController::class, 'update'])->whereNumber('task')->name('tasks.update');
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->whereNumber('task')->name('tasks.destroy');
+    Route::delete('/tasks/{task}/delete', [TaskController::class, 'destroyPermanently'])->whereNumber('task')->name('tasks.delete');
 
     Route::get('/account/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/account/profile', [ProfileController::class, 'update'])->name('profile.update');

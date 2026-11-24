@@ -81,6 +81,15 @@ class TaskController extends Controller
             ->with('status', 'Task archived successfully.');
     }
 
+    public function destroyPermanently(int $task): RedirectResponse
+    {
+        $this->activeTask($task)->delete();
+
+        return redirect()
+            ->route('tasks.index')
+            ->with('status', 'Task permanently deleted.');
+    }
+
     private function activeTask(int $id): Task
     {
         return Task::query()
